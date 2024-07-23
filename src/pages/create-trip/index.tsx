@@ -3,6 +3,7 @@ import { FormEvent, useState } from 'react';
 import { GuestsInput } from './guests-input';
 import { GuestsModal } from './guests-modal';
 import { ConfirmationModal } from './confirmation-modal';
+import { Header } from './header';
 
 export function Home() {
 
@@ -61,12 +62,7 @@ export function Home() {
   return (
     <div className="bg-pattern h-screen bg-no-repeat bg-center flex items-center justify-center">
       <div className="max-w-3xl w-full px-6 text-center space-y-10">
-        <div className="flex flex-col items-center">
-          <img src={"./logo.svg"} alt="logo planner" />
-          <p className="text-zinc-300 text-lg">
-            Convide seus amigos e planeje sua próxima viagem!
-          </p>
-        </div>
+        <Header />
 
         <div className="space-y-4">
           <div className="h-16 flex items-center bg-zinc-900 rounded-xl shadow-shape px-4 gap-3">
