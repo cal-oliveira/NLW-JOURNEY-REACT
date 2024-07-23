@@ -51,7 +51,6 @@ export function Home() {
 
   function openGuestsInput() {
     setGuestsInput(true);
-    console.log(destination,when)
   }
 
   function closeGuestsInput() {
@@ -67,7 +66,9 @@ export function Home() {
   }
 
   function openConfirmationModal() {
-    setConfirmationModal(true);
+    if(selectedDates && destination != ''){
+      setConfirmationModal(true);
+    }
   }
 
   function closeConfirmationModal() {

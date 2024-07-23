@@ -1,7 +1,7 @@
 import { MapPin, Calendar, Settings2, ArrowRight } from "lucide-react";
 import { ChangeEvent, useEffect, useState } from "react";
-import "react-day-picker/dist/style.css";
 import { SelectDates } from "./select-date";
+import "react-day-picker/dist/style.css";
 
 interface DestinationAndDatesProps {
     guestsInput: boolean,
