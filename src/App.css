@@ -1,3 +1,36 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  min-width: 0;
+}
+
+input {
+    color-scheme:dark
+}
+
+:root {
+    --rdp-accent-color: #BEF264;
+}
+
+/* Estilo para as datas selecionadas */
+.my-selected:not([disabled]) { 
+    font-weight: bold;
+    background-color: #bef264;
+    color: #365314 ;
+  }
+  
+  .my-selected:hover:not([disabled]) { 
+    background-color: #45a049;
+  }
+  
+  /* Estilo para as datas selecionadas no intervalo */
+  .my-selected-range:not([disabled]) { 
+    background-color: #81c784;
+    color: white;
+  }
+  
+  .my-selected-range:hover:not([disabled]) { 
+    background-color: #66bb6a;
+  }

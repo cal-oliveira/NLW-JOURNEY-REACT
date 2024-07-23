@@ -3,7 +3,7 @@ import { X, User, Mail } from "lucide-react";
 interface ConfirmationModalProps {
     closeGuestsModal: ()=> void,
     destination: string,
-    dates: string
+    dates: string | null
 }
 
 export function ConfirmationModal({closeGuestsModal, destination, dates}: ConfirmationModalProps) {

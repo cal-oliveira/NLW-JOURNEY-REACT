@@ -16,6 +16,8 @@ export function Home() {
   const [guestsModal, setGuestsModal] = useState(false);
   const [confirmationModal, setConfirmationModal] = useState(false);
 
+  const [selectedDates, setSelectedDates] = useState<string | null>(null)
+
   function handleDestinationChange(event: ChangeEvent<HTMLInputElement>){
     setDestination(event.target.value)
     console.log(destination)
@@ -84,6 +86,7 @@ export function Home() {
             guestsInput={guestsInput}
             handleDestinationChange={handleDestinationChange}
             handleWhenChange={handleWhenChange}
+            dates={setSelectedDates}
           />
           {guestsInput && (
             <GuestsInput
@@ -117,7 +120,7 @@ export function Home() {
       {confirmationModal && (
         <ConfirmationModal
           destination={destination}
-          dates={when}
+          dates={selectedDates}
           closeGuestsModal={closeConfirmationModal}
         />
       )}
