@@ -1,5 +1,5 @@
-import { ArrowRight, Calendar, Mail, MapPin, Settings2, User, X } from 'lucide-react'
-import { FormEvent, useState } from 'react';
+import { ArrowRight, Calendar, MapPin, Settings2 } from 'lucide-react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { GuestsInput } from './guests-input';
 import { GuestsModal } from './guests-modal';
 import { ConfirmationModal } from './confirmation-modal';
@@ -7,11 +7,23 @@ import { Header } from './header';
 
 export function Home() {
 
+  const [destination,setDestination] = useState('')
+  const [when,setWhen] = useState('')
+
   const [emailsToInvite, setEmailsToInvite] = useState<string[]>([])
 
   const [guestsInput, setGuestsInput] = useState(false);
   const [guestsModal, setGuestsModal] = useState(false);
   const [confirmationModal, setConfirmationModal] = useState(false);
+
+  function handleDestinationChange(event: ChangeEvent<HTMLInputElement>){
+    setDestination(event.target.value)
+    console.log(destination)
+  }
+
+  function handleWhenChange(event: ChangeEvent<HTMLInputElement>){
+    setWhen(event.currentTarget.value)
+  }
 
   function addNewEmailToInvite(event:FormEvent<HTMLFormElement>){
     event.preventDefault()
@@ -37,6 +49,7 @@ export function Home() {
 
   function openGuestsInput() {
     setGuestsInput(true);
+    console.log(destination,when)
   }
 
   function closeGuestsInput() {
@@ -70,6 +83,8 @@ export function Home() {
               <MapPin className="text-zinc-400 size-5" />
               <input
                 disabled={guestsInput}
+                onChange={handleDestinationChange}
+                name='destination'
                 className="bg-transparent text-white outline-none placeholder-zinc-400 flex-1"
                 type="text"
                 placeholder="Para onde você vai?"
@@ -79,6 +94,8 @@ export function Home() {
               <Calendar className="text-zinc-400 size-5" />
               <input
                 disabled={guestsInput}
+                name='when'
+                onChange={handleWhenChange}
                 className="bg-transparent text-white outline-none w-40 flex-1"
                 type="text"
                 placeholder="Quando?"
@@ -97,6 +114,7 @@ export function Home() {
               </button>
             ) : (
               <button
+                type='submit'
                 onClick={openGuestsInput}
                 className="bg-lime-300 text-lime-950 font-medium flex items-center justify-center gap-2 w-auto px-5 py-2 rounded-lg hover:bg-lime-700"
               >
