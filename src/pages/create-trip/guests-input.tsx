@@ -2,10 +2,11 @@ import { UserRoundPlus, ArrowRight } from "lucide-react";
 
 interface GuestsInputProps {
     openGuestsModal: ()=> void,
-    openConfirmationModal: ()=> void
+    openConfirmationModal: ()=> void,
+    emailsToInvite: string[]
 }
 
-export function GuestsInput({openGuestsModal, openConfirmationModal}:GuestsInputProps){
+export function GuestsInput({openGuestsModal, openConfirmationModal,emailsToInvite}:GuestsInputProps){
     return (
       <div className="h-16 flex items-center bg-zinc-900 rounded-xl shadow-shape px-4 gap-3">
         <button
@@ -14,7 +15,7 @@ export function GuestsInput({openGuestsModal, openConfirmationModal}:GuestsInput
         >
           <UserRoundPlus className="text-zinc-400 size-5" />
           <span className="bg-transparent outline-none text-zinc-400 flex-1 text-left">
-            Quem estará na viagem?
+            {emailsToInvite.length === 0 ? 'Quem estará na viagem?' : `${emailsToInvite.length} pessoa(s) convidada(s)`}
           </span>
         </button>
         <button onClick={openConfirmationModal} className="bg-lime-300 text-lime-950 flex items-center gap-2 px-5 py-2 rounded-lg hover:bg-lime-700">

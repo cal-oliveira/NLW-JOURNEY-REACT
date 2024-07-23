@@ -92,6 +92,7 @@ export function Home() {
             <GuestsInput
               openConfirmationModal={openConfirmationModal}
               openGuestsModal={openGuestsModal}
+              emailsToInvite={emailsToInvite}
             />
           )}
         </div>
