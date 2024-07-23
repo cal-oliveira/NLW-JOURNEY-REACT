@@ -73,6 +73,7 @@ export function Home() {
             <div className="flex items-center gap-2 flex-1">
               <MapPin className="text-zinc-400 size-5" />
               <input
+                disabled={guestsInput}
                 className="bg-transparent text-white outline-none placeholder-zinc-400 flex-1"
                 type="text"
                 placeholder="Para onde você vai?"
@@ -81,6 +82,7 @@ export function Home() {
             <div className="flex items-center gap-2 w-[240px]">
               <Calendar className="text-zinc-400 size-5" />
               <input
+                disabled={guestsInput}
                 className="bg-transparent text-white outline-none w-40 flex-1"
                 type="text"
                 placeholder="Quando?"
