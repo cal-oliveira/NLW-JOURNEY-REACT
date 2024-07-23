@@ -1,10 +1,11 @@
 import { UserRoundPlus, ArrowRight } from "lucide-react";
 
 interface GuestsInputProps {
-    openGuestsModal: ()=> void
+    openGuestsModal: ()=> void,
+    openConfirmationModal: ()=> void
 }
 
-export function GuestsInput({openGuestsModal}:GuestsInputProps){
+export function GuestsInput({openGuestsModal, openConfirmationModal}:GuestsInputProps){
     return (
       <div className="h-16 flex items-center bg-zinc-900 rounded-xl shadow-shape px-4 gap-3">
         <button
@@ -16,7 +17,7 @@ export function GuestsInput({openGuestsModal}:GuestsInputProps){
             Quem estará na viagem?
           </span>
         </button>
-        <button className="bg-lime-300 text-lime-950 flex items-center gap-2 px-5 py-2 rounded-lg hover:bg-lime-700">
+        <button onClick={openConfirmationModal} className="bg-lime-300 text-lime-950 flex items-center gap-2 px-5 py-2 rounded-lg hover:bg-lime-700">
           Confirmar viagem <ArrowRight className="size-5" />{" "}
         </button>
       </div>
