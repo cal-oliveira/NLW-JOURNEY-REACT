@@ -14,6 +14,11 @@ export function Home() {
   const [guestsInput, setGuestsInput] = useState(false);
   const [guestsModal, setGuestsModal] = useState(true);
 
+  function removeEmail(emailToRemove:string){
+    const newEmailsList = emailsToInvite.filter((email) => email !== emailToRemove)
+    setEmailsToInvite(newEmailsList)
+  }
+
   function openGuestsInput() {
     setGuestsInput(true);
   }
@@ -128,14 +133,20 @@ export function Home() {
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-2">
+            {emailsToInvite.length == 0 ? (
+              <p className='text-zinc-400'>Você ainda não convidou ninguém.</p>
+            ):(
+              <div className="flex flex-wrap gap-2">
               {emailsToInvite.map((email) => (
                 <div key={email} className="bg-zinc-800 flex items-center gap-2.5 py-1.5 px-2.5 rounded-md">
                   <span className="text-zinc-300">{email}</span>
-                  <X className="text-zinc-400 size-4" />
+                  <button onClick={()=> removeEmail(email)}>
+                    <X className="text-zinc-400 size-4" />
+                  </button>
                 </div>
               ))}
             </div>
+            )}
 
             <div className="h-px w-full bg-zinc-800" />
 
