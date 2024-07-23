@@ -1,18 +1,31 @@
 import { ArrowRight, AtSign, Calendar, MapPin, Plus, Settings2, UserRoundPlus, X } from 'lucide-react'
 import { func } from 'prop-types';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
+import { GuestsInput } from './guests-input';
 
 export function Home() {
 
-  const [emailsToInvite, setEmailsToInvite] = useState([
-    "joao.silva@example.com",
-    "maria.oliveira@example.com",
-    "pedro.santos@example.com",
-    "ana.souza@example.com"
-])
+  const [emailsToInvite, setEmailsToInvite] = useState<string[]>([])
 
   const [guestsInput, setGuestsInput] = useState(false);
-  const [guestsModal, setGuestsModal] = useState(true);
+  const [guestsModal, setGuestsModal] = useState(false);
+
+  function addNewEmailToInvite(event:FormEvent<HTMLFormElement>){
+    event.preventDefault()
+
+    const data = new FormData(event.currentTarget)
+    const email = data.get('email')?.toString()
+
+    if(!email){
+      return
+    }
+
+    if(emailsToInvite.includes(email)){
+      return
+    }
+
+    setEmailsToInvite([...emailsToInvite,email])
+  }
 
   function removeEmail(emailToRemove:string){
     const newEmailsList = emailsToInvite.filter((email) => email !== emailToRemove)
@@ -86,20 +99,7 @@ export function Home() {
           </div>
 
           {guestsInput && (
-            <div className="h-16 flex items-center bg-zinc-900 rounded-xl shadow-shape px-4 gap-3">
-              <button
-                onClick={openGuestsModal}
-                className="flex items-center gap-2 flex-1"
-              >
-                <UserRoundPlus className="text-zinc-400 size-5" />
-                <span className="bg-transparent outline-none text-zinc-400 flex-1 text-left">
-                  Quem estará na viagem?
-                </span>
-              </button>
-              <button className="bg-lime-300 text-lime-950 flex items-center gap-2 px-5 py-2 rounded-lg hover:bg-lime-700">
-                Confirmar viagem <ArrowRight className="size-5" />{" "}
-              </button>
-            </div>
+            <GuestsInput openGuestsModal={openGuestsModal}/>
           )}
         </div>
 
@@ -150,17 +150,18 @@ export function Home() {
 
             <div className="h-px w-full bg-zinc-800" />
 
-            <div className="h-16 flex items-center bg-zinc-950 rounded-xl border border-zinc-800 px-4 gap-3">
+            <form onSubmit={addNewEmailToInvite} className="h-16 flex items-center bg-zinc-950 rounded-xl border border-zinc-800 px-4 gap-3">
               <AtSign className="text-zinc-400 size-4" />
               <input
                 className="bg-transparent text-white outline-none w-40 flex-1"
                 type="text"
+                name="email"
                 placeholder="Digite o e-mail do convidado"
               />
-              <button className="bg-lime-300 text-lime-950 font-medium flex items-center justify-center gap-2 w-auto px-5 py-2 rounded-lg hover:bg-lime-700">
+              <button type='submit' className="bg-lime-300 text-lime-950 font-medium flex items-center justify-center gap-2 w-auto px-5 py-2 rounded-lg hover:bg-lime-700">
                 Convidar <Plus className="text-lime-950" />
               </button>
-            </div>
+            </form>
           </div>
         </div>
       )}
