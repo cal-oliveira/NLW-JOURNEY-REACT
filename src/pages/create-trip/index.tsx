@@ -1,5 +1,5 @@
 import { ArrowRight, Calendar, MapPin, Settings2 } from 'lucide-react'
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { GuestsInput } from './guests-input';
 import { GuestsModal } from './guests-modal';
 import { ConfirmationModal } from './confirmation-modal';
@@ -149,7 +149,7 @@ export function Home() {
       )}
 
       {confirmationModal && (
-        <ConfirmationModal closeGuestsModal={closeConfirmationModal}/>
+        <ConfirmationModal destination={destination} dates={when} closeGuestsModal={closeConfirmationModal}/>
       )}
     </div>
   );
