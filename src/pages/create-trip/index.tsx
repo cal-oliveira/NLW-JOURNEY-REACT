@@ -5,7 +5,7 @@ import { ConfirmationModal } from './confirmation-modal';
 import { Header } from './header';
 import { DestinationAndDates } from './destination-and-dates';
 
-export function Home() {
+export function CreateTrip() {
 
   const [destination,setDestination] = useState('')
   const [when,setWhen] = useState('')
@@ -20,7 +20,6 @@ export function Home() {
 
   function handleDestinationChange(event: ChangeEvent<HTMLInputElement>){
     setDestination(event.target.value)
-    console.log(destination)
   }
 
   function handleWhenChange(event: ChangeEvent<HTMLInputElement>){
