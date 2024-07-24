@@ -4,8 +4,11 @@ import { GuestsModal } from './guests-modal';
 import { ConfirmationModal } from './confirmation-modal';
 import { Header } from './header';
 import { DestinationAndDates } from './destination-and-dates';
+import { useNavigate } from 'react-router-dom';
 
 export function CreateTrip() {
+
+  const navigate = useNavigate()
 
   const [destination,setDestination] = useState('')
   const [when,setWhen] = useState('')
@@ -17,6 +20,9 @@ export function CreateTrip() {
   const [confirmationModal, setConfirmationModal] = useState(false);
 
   const [selectedDates, setSelectedDates] = useState<string | null>(null)
+
+  const [ownersName, setOwnersName] = useState('')
+  const [ownersEmail, setOwnersEmail] = useState('')
 
   function handleDestinationChange(event: ChangeEvent<HTMLInputElement>){
     setDestination(event.target.value)
@@ -74,6 +80,11 @@ export function CreateTrip() {
     setConfirmationModal(false);
   }
 
+  function createTrip(event: FormEvent<HTMLFormElement>){
+    event.preventDefault()
+    console.log(ownersName,ownersEmail, emailsToInvite, selectedDates, destination)
+  }
+
   return (
     <div className="bg-pattern h-screen bg-no-repeat bg-center flex items-center justify-center">
       <div className="max-w-3xl w-full px-6 text-center space-y-10">
@@ -123,6 +134,9 @@ export function CreateTrip() {
           destination={destination}
           dates={selectedDates}
           closeGuestsModal={closeConfirmationModal}
+          setOwnersName={setOwnersName}
+          setOwnersEmail={setOwnersEmail}
+          createTrip={createTrip}
         />
       )}
     </div>
