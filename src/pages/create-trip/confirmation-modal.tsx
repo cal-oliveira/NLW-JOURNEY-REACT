@@ -4,7 +4,7 @@ import { ChangeEvent, FormEvent } from "react";
 interface ConfirmationModalProps {
   closeGuestsModal: () => void;
   destination: string;
-  dates: string | null;
+  dates: string | undefined;
   setOwnersName: (name: string)=> void,
   setOwnersEmail: (email: string)=> void,
   createTrip: (event: FormEvent<HTMLFormElement>)=> void

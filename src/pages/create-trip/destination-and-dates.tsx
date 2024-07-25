@@ -2,23 +2,26 @@ import { MapPin, Calendar, Settings2, ArrowRight } from "lucide-react";
 import { ChangeEvent, useEffect, useState } from "react";
 import { SelectDates } from "./select-date";
 import "react-day-picker/dist/style.css";
+import { DateRange } from "react-day-picker";
 
 interface DestinationAndDatesProps {
     guestsInput: boolean,
     handleDestinationChange: (event: ChangeEvent<HTMLInputElement>)=> void,
-    handleWhenChange: (event: ChangeEvent<HTMLInputElement>)=> void,
     closeGuestsInput: ()=> void,
     openGuestsInput: ()=> void,
-    dates: (dates:string | null)=> void
+    dates: (dates:DateRange | undefined)=> void,
+    setStringDatesToMain: (stringDates: string | undefined) => void
 }
 
-export function DestinationAndDates({guestsInput, handleDestinationChange, closeGuestsInput, openGuestsInput, dates}:DestinationAndDatesProps) {
+export function DestinationAndDates({guestsInput, handleDestinationChange, closeGuestsInput, openGuestsInput, dates, setStringDatesToMain}:DestinationAndDatesProps) {
   
     const [isOpenDayPicker,setIsOpenDayPicker] = useState(false)
-    const [selectedDates, setSelectedDates] = useState<string | null>(null)
+    const [selectedDates, setSelectedDates] = useState<DateRange | undefined>()
+    const [stringDates, setStringDates] = useState<string | undefined>()
 
     useEffect(()=> {
       dates(selectedDates)
+      setStringDatesToMain(stringDates)
     }, [selectedDates, setSelectedDates])
 
     function openDayPicker(){
@@ -48,13 +51,14 @@ export function DestinationAndDates({guestsInput, handleDestinationChange, close
           className="flex items-center gap-2 text-left w-[240px]"
         >
           <Calendar className="text-zinc-400 size-5" />
-          <span className="text-base text-zinc-400 w-40 flex-1">{selectedDates || 'Quando?'}</span>
+          <span className="text-base text-zinc-400 w-40 flex-1">{stringDates || 'Quando?'}</span>
         </button>
 
         {isOpenDayPicker && (
           <SelectDates 
             setSelectedDates={setSelectedDates}
             closeDayPicker={closeDayPicker}
+            setDates={setStringDates}
           />
         )}
 

@@ -5,13 +5,14 @@ import { ConfirmationModal } from './confirmation-modal';
 import { Header } from './header';
 import { DestinationAndDates } from './destination-and-dates';
 import { useNavigate } from 'react-router-dom';
+import { api } from '../../lib/axios';
+import { DateRange } from 'react-day-picker';
 
 export function CreateTrip() {
 
   const navigate = useNavigate()
 
   const [destination,setDestination] = useState('')
-  const [when,setWhen] = useState('')
 
   const [emailsToInvite, setEmailsToInvite] = useState<string[]>([])
 
@@ -19,17 +20,14 @@ export function CreateTrip() {
   const [guestsModal, setGuestsModal] = useState(false);
   const [confirmationModal, setConfirmationModal] = useState(false);
 
-  const [selectedDates, setSelectedDates] = useState<string | null>(null)
+  const [selectedDates, setSelectedDates] = useState<DateRange | undefined>()
+  const [stringDates, setStringDates] = useState<string | undefined>()
 
   const [ownersName, setOwnersName] = useState('')
   const [ownersEmail, setOwnersEmail] = useState('')
 
   function handleDestinationChange(event: ChangeEvent<HTMLInputElement>){
     setDestination(event.target.value)
-  }
-
-  function handleWhenChange(event: ChangeEvent<HTMLInputElement>){
-    setWhen(event.currentTarget.value)
   }
 
   function addNewEmailToInvite(event:FormEvent<HTMLFormElement>){
@@ -80,9 +78,22 @@ export function CreateTrip() {
     setConfirmationModal(false);
   }
 
-  function createTrip(event: FormEvent<HTMLFormElement>){
+  async function createTrip(event: FormEvent<HTMLFormElement>){
     event.preventDefault()
     console.log(ownersName,ownersEmail, emailsToInvite, selectedDates, destination)
+
+    const response = await api.post('/trips', {
+      destination,
+      starts_at: selectedDates?.from,
+      ends_at: selectedDates?.to,
+      emails_to_invite: emailsToInvite,
+      owner_name: ownersName,
+      owner_email: ownersEmail
+    })
+
+    const { tripId } = response.data
+
+    navigate(`/trips/${tripId}`)
   }
 
   return (
@@ -96,8 +107,8 @@ export function CreateTrip() {
             closeGuestsInput={closeGuestsInput}
             guestsInput={guestsInput}
             handleDestinationChange={handleDestinationChange}
-            handleWhenChange={handleWhenChange}
             dates={setSelectedDates}
+            setStringDatesToMain={setStringDates}
           />
           {guestsInput && (
             <GuestsInput
@@ -132,7 +143,7 @@ export function CreateTrip() {
       {confirmationModal && (
         <ConfirmationModal
           destination={destination}
-          dates={selectedDates}
+          dates={stringDates}
           closeGuestsModal={closeConfirmationModal}
           setOwnersName={setOwnersName}
           setOwnersEmail={setOwnersEmail}

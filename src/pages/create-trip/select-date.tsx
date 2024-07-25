@@ -6,19 +6,22 @@ import { DateRange, DayPicker } from "react-day-picker";
 
 interface SelectDatesProps {
     closeDayPicker: ()=> void,
-    setSelectedDates: (dates: string | null) => void
+    setSelectedDates: (dates:DateRange | undefined) => void,
+    setDates: (dateString: string | undefined)=> void
 }
 
-export function SelectDates({closeDayPicker, setSelectedDates}: SelectDatesProps) {
+export function SelectDates({closeDayPicker, setSelectedDates, setDates}: SelectDatesProps) {
 
   const [startAndEndOfTheTrip, setStartAndEndOfTheTrip] = useState<DateRange | undefined>()
 
     useEffect(()=>{
-        const selectedDates = startAndEndOfTheTrip && startAndEndOfTheTrip.to && startAndEndOfTheTrip.from 
-        ? format(startAndEndOfTheTrip.from, "d' de 'LLL").concat(' até ').concat(format(startAndEndOfTheTrip.to, "d' de 'LLL"))
-        : null
+      const selectedDates = startAndEndOfTheTrip && startAndEndOfTheTrip.to && startAndEndOfTheTrip.from 
+      ? format(startAndEndOfTheTrip.from, "d' de 'LLL").concat(' até ').concat(format(startAndEndOfTheTrip.to, "d' de 'LLL"))
+      : undefined
 
-        setSelectedDates(selectedDates)
+      setSelectedDates(startAndEndOfTheTrip)
+      setDates(selectedDates)
+        
 
     }, [startAndEndOfTheTrip,setSelectedDates])
 
