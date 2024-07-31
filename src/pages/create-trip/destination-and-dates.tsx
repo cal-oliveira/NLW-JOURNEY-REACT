@@ -3,6 +3,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { SelectDates } from "./select-date";
 import "react-day-picker/dist/style.css";
 import { DateRange } from "react-day-picker";
+import { Separator } from "../../components/separator";
 
 interface DestinationAndDatesProps {
     guestsInput: boolean,
@@ -62,7 +63,7 @@ export function DestinationAndDates({guestsInput, handleDestinationChange, close
           />
         )}
 
-        <div className="h-6 w-px bg-zinc-800" />
+        <Separator />
 
         {guestsInput ? (
           <button
