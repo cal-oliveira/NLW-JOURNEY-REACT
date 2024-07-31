@@ -43,7 +43,7 @@ export function TripDetails() {
             <h2 className="text-zinc-50 font-semibold text-3xl">Atividades</h2>
             <button
               onClick={() => {}}
-              className="bg-lime-300 text-lime-950 font-medium text-base flex items-center justify-center h-9 px-5 gap-2 py-2 rounded-lg"
+              className="bg-lime-300 text-lime-950 font-medium text-base flex items-center justify-center h-9 px-5 gap-2 py-2 rounded-lg hover:bg-lime-500"
             >
               <Plus className="size-5" />
               Cadastrar atividade
