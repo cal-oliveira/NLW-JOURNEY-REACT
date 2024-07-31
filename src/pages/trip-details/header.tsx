@@ -26,7 +26,7 @@ export function Header({destination,starts_at, ends_at}:HeaderProps){
 
           <button
             onClick={() => {}}
-            className="bg-zinc-800 text-zinc-200 font-medium text-base flex items-center justify-center h-9 px-5 gap-2 py-2 rounded-lg"
+            className="bg-zinc-800 text-zinc-200 font-medium text-base flex items-center justify-center h-9 px-5 gap-2 py-2 rounded-lg hover:bg-zinc-600"
           >
             Alterar local/data
             <Settings2 className="size-5" />
